@@ -1,6 +1,5 @@
 import 'package:bmi/constans/constans.dart';
 import 'package:bmi/views/bmi_data_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BmiResultScreen extends StatelessWidget {
@@ -8,7 +7,7 @@ class BmiResultScreen extends StatelessWidget {
 
   final double bmi;
 
-  determineBmiCategory(double bmiValue) {
+  String determineBmiCategory(double bmiValue) {
     String category = "";
     if (bmiValue < 16.0) {
       category = underweightSevere;
@@ -31,24 +30,52 @@ class BmiResultScreen extends StatelessWidget {
     return category;
   }
 
+  String getHealRiskDecripsion(String categoryName) {
+    String desc = "";
+    switch (categoryName) {
+      case underweightSevere:
+      case underweightModerate:
+      case underweightmild:
+        desc = "Possible nutritional deficiency and osteoporosis";
+        break;
+      
+      case normal:
+        desc = "Low Risk (Healty Range)";
+        break;
+      case overweight:
+        desc =
+            "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
+        break;
+        case obeseI:
+        case obeseII:
+        case obeseIII:
+        desc = "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
+        break;
+      
+      default:
+    }
+    return desc;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bmiCategory = determineBmiCategory(bmi);
+    final bmiDesc = getHealRiskDecripsion(bmiCategory);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hasil Hitung BMI"),
+        title: const Text("Hasil Hitung BMI"),
       ),
       body: Column(
         children: [
-          Expanded(
-            child: Container(
-              child: Center(
-                child: Text(
-                  "Hasil Perhitungan BMI anda",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+          const Expanded(
+            child: Center(
+              child: Text(
+                "Hasil Perhitungan BMI anda",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -56,31 +83,32 @@ class BmiResultScreen extends StatelessWidget {
           Expanded(
             flex: 5,
             child: BmiCard(
-              Child: Container(
+              child: Container(
+                width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      determineBmiCategory(bmi),
-                      style: TextStyle(
+                      bmiCategory,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                     Text(
-                      "${bmi.toStringAsFixed(1)}",
-                      style: TextStyle(
+                      bmi.toStringAsFixed(1),
+                      style: const TextStyle(
                         fontSize: 100,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                     Text(
-                      "Your BMI result is quit low, you should eat more",
+                      bmiDesc,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
                       ),
@@ -96,8 +124,8 @@ class BmiResultScreen extends StatelessWidget {
             },
             child: Container(
               height: 80,
-              color: Color(0xffec3c66),
-              child: Center(
+              color: const Color(0xffec3c66),
+              child: const Center(
                 child: Text(
                   "Hitung Ulang",
                   style: TextStyle(
