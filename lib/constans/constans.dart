@@ -5,8 +5,17 @@ TextStyle labelTextStyle =
     const TextStyle(fontSize: 18, color: Colors.white //Color(0xff8d8e98),
         );
 
-TextStyle numberTextStyle = TextStyle(
+TextStyle numberTextStyle = const TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.bold,
   color: Colors.white,
 );
+
+String underweightSevere = "Underweight (Severe thinness)";
+String underweightModerate = "Underweight (Moderate thinness)";
+String underweightmild = "Underweight (mild thinness)";
+String normal = "Normal";
+String overweight = "Overweight";
+String obeseI = "Obese(Class I)";
+String obeseII = "Obese(Class II)";
+String obeseIII = "Obese(Class III)";

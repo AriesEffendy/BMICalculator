@@ -36,7 +36,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: BmiCard(
                     Child: GenderIconText(
@@ -64,7 +64,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                   children: [
                     Text(
                       "HEIGHT",
-                      style: labelTextStyle!.copyWith(
+                      style: labelTextStyle.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -145,13 +145,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   setState(() {});
                                 },
                                 elevation: 0,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.remove,
                                   color: Colors.white,
                                 ),
                                 shape: CircleBorder(),
                                 fillColor: Color.fromARGB(255, 104, 102, 187),
-                                constraints: BoxConstraints.tightFor(
+                                constraints: const BoxConstraints.tightFor(
                                   width: 56,
                                   height: 56,
                                 ),
@@ -185,13 +185,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   setState(() {});
                                 },
                                 elevation: 0,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.add,
                                   color: Colors.white,
                                 ),
                                 shape: CircleBorder(),
-                                fillColor: Color.fromARGB(255, 104, 102, 187),
-                                constraints: BoxConstraints.tightFor(
+                                fillColor: const Color.fromARGB(255, 104, 102, 187),
+                                constraints: const BoxConstraints.tightFor(
                                   width: 56,
                                   height: 56,
                                 ),
@@ -203,13 +203,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   setState(() {});
                                 },
                                 elevation: 0,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.remove,
                                   color: Colors.white,
                                 ),
                                 shape: CircleBorder(),
                                 fillColor: Color.fromARGB(255, 104, 102, 187),
-                                constraints: BoxConstraints.tightFor(
+                                constraints: const BoxConstraints.tightFor(
                                   width: 56,
                                   height: 56,
                                 ),
