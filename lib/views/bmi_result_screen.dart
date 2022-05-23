@@ -1,66 +1,76 @@
 import 'package:bmi/constans/constans.dart';
+import 'package:bmi/helpers/bmi_calculator.dart';
 import 'package:bmi/views/bmi_data_screen.dart';
 import 'package:flutter/material.dart';
 
 class BmiResultScreen extends StatelessWidget {
-  const BmiResultScreen({Key? key, required this.bmi}) : super(key: key);
+  const BmiResultScreen({
+    Key? key,
+    required this.bmi,
+    // required this.bmiCalculator,
+  }) : super(key: key);
 
   final double bmi;
+  // final BmiCalculator? bmiCalculator;
 
-  String determineBmiCategory(double bmiValue) {
-    String category = "";
-    if (bmiValue < 16.0) {
-      category = underweightSevere;
-    } else if (bmiValue < 17) {
-      category = underweightModerate;
-    } else if (bmiValue < 18.5) {
-      category = underweightmild;
-    } else if (bmiValue < 25) {
-      category = normal;
-    } else if (bmiValue < 30) {
-      category = overweight;
-    } else if (bmiValue < 35) {
-      category = obeseI;
-    } else if (bmiValue < 40) {
-      category = obeseII;
-    } else if (bmiValue >= 40) {
-      category = obeseIII;
-    }
+  // String determineBmiCategory(double bmiValue) {
+  //   String category = "";
+  //   if (bmiValue < 16.0) {
+  //     category = underweightSevere;
+  //   } else if (bmiValue < 17) {
+  //     category = underweightModerate;
+  //   } else if (bmiValue < 18.5) {
+  //     category = underweightmild;
+  //   } else if (bmiValue < 25) {
+  //     category = normal;
+  //   } else if (bmiValue < 30) {
+  //     category = overweight;
+  //   } else if (bmiValue < 35) {
+  //     category = obeseI;
+  //   } else if (bmiValue < 40) {
+  //     category = obeseII;
+  //   } else if (bmiValue >= 40) {
+  //     category = obeseIII;
+  //   }
 
-    return category;
-  }
+  //   return category;
+  // }
 
-  String getHealRiskDecripsion(String categoryName) {
-    String desc = "";
-    switch (categoryName) {
-      case underweightSevere:
-      case underweightModerate:
-      case underweightmild:
-        desc = "Possible nutritional deficiency and osteoporosis";
-        break;
-      
-      case normal:
-        desc = "Low Risk (Healty Range)";
-        break;
-      case overweight:
-        desc =
-            "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
-        break;
-        case obeseI:
-        case obeseII:
-        case obeseIII:
-        desc = "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
-        break;
-      
-      default:
-    }
-    return desc;
-  }
+  // String getHealRiskDecripsion(String categoryName) {
+  //   String desc = "";
+  //   switch (categoryName) {
+  //     case underweightSevere:
+  //     case underweightModerate:
+  //     case underweightmild:
+  //       desc = "Possible nutritional deficiency and osteoporosis";
+  //       break;
+
+  //     case normal:
+  //       desc = "Low Risk (Healty Range)";
+  //       break;
+  //     case overweight:
+  //       desc =
+  //           "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
+  //       break;
+  //     case obeseI:
+  //     case obeseII:
+  //     case obeseIII:
+  //       desc =
+  //           "Moderate Risk of developing heart disease, High Blood pressure , stroke, diabetes mellitus";
+  //       break;
+
+  //     default:
+  //   }
+  //   return desc;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final bmiCategory = determineBmiCategory(bmi);
-    final bmiDesc = getHealRiskDecripsion(bmiCategory);
+    final BmiCalculator bmiCalculator = BmiCalculator.fromBmiValue(bmi);
+    // final bmiCategory = 
+    bmiCalculator.determineBmiCategory();
+    // final bmiDesc = 
+    bmiCalculator.getHealRiskDecripsion();
 
     return Scaffold(
       appBar: AppBar(
@@ -90,7 +100,7 @@ class BmiResultScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      bmiCategory,
+                      bmiCalculator.bmiCategory!,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -106,7 +116,7 @@ class BmiResultScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      bmiDesc,
+                      bmiCalculator.bmiDescription!,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 15,
